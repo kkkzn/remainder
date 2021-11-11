@@ -1,11 +1,10 @@
 from datetime import datetime
-import pandas as pd
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SubmitField
 from wtforms.fields.html5 import DateTimeLocalField
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import InputRequired
 
 
 class SleepRecordForm(FlaskForm):

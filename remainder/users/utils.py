@@ -3,6 +3,8 @@ With Flask-mail, didn't succeed in sending a reset email from G-mail account.
 So decided to use smtplib and email packages instead.
 """
 import os
+from dotenv import load_dotenv
+
 from flask import url_for
 import smtplib
 from email.mime.text import MIMEText
@@ -11,6 +13,8 @@ from email.header import Header
 
 
 def config_reset_email(user):
+    load_dotenv()
+
     # get token
     token = user.get_reset_token()
 
@@ -31,6 +35,8 @@ Remainder Admin""",
 
 
 def send_email(config):
+    load_dotenv()
+
     MAIL_USERNAME = os.environ.get('EMAIL_USER')
     MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 

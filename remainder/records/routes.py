@@ -1,16 +1,12 @@
-import io
-
+import pandas as pd
 from flask import Blueprint, flash, redirect, render_template, request, url_for, abort, Markup
 from flask_login import current_user, login_required
 
-import pandas as pd
-
 from remainder import db
+from remainder.main.utils import get_scalers
 from remainder.models import Sleep
 from remainder.records.forms import SleepRecordForm, UploadForm
 from remainder.records.utils import try_parse, encode_daily_record_graph
-from remainder.main.utils import get_scalers
-
 
 records_bp = Blueprint('records', __name__)
 

@@ -4,7 +4,6 @@ import io
 import datetime 
 from dateutil.parser import parse
 
-import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -77,7 +76,6 @@ def encode_daily_record_graph(date: list, sleep: list, up: list, bed: list):
         '9:00',
         '10:00'
     ])
-
 
     # Graph for BED TIME
     ax3.plot(x, bed)
