@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}{{ title }}{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+<section class="content-section">
+  <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">{{ legend }}</legend>
+          <div class="form-group">
+              {{ form.up.label(class="form-control-label") }}
+              {% if form.up.errors %}
+                  {{ form.up(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.up.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.up(class="form-control form-control-lg") }}
+              {% endif %}
+          </div>
+          <div class="form-group">
+              {{ form.to_bed.label(class="form-control-label") }}
+              {% if form.to_bed.errors %}
+                  {{ form.to_bed(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.to_bed.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.to_bed(class="form-control form-control-lg") }}
+              {% endif %}
+          </div>
+      </fieldset>
+      <div class="form-group">
+          {{ form.submit(class="btn btn-outline-info") }}
+      </div>
+      <a type="button" class="btn btn-outline-info link" href="{{ url_for('records.upload') }}">Add from CSV</a>
+      <a type="button" class="btn btn-outline-info link" href="{{ url_for('main.dashboard') }}">Cancel</a>
+  </form>
+</section>
+{% endblock %}

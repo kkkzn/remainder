@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}{{ title }}{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+<div class="content-section dashboard">
+  <h2 class="display-4">
+    Coming Soon
+  </h2>
+  <br>
+  <p class="lead">We are currently working on this feature and will launch soon!</p>
+  <hr class="my-4">
+  <a type="button" class="btn btn-outline-info" href="{{ url_for('main.dashboard') }}">Go Back</a>
+</div>
+{% endblock %}

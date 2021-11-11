@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}{{ title }}{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+  <div class="content-section graph">
+    <div>{{ graph_html_string }}</div>
+    <br>
+    <a type="button" class="btn btn-outline-info link" href="{{ url_for('main.dashboard') }}">Go Back</a>
+  </div>
+{% endblock %}

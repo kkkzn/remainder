@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard {% endblock %}
+
+{% block content %}
+  <div class="content-section dashboard">
+    <h2 class="heading">Remaining Time</h2>
+    <div>
+      <div>{{ pie_html_string }}</div>
+      <div>Remainder of the day: {{ dashboard.remaining }}</div>
+      <div>Estimated to-bed time: {{ dashboard.bed_time }}</div>
+    </div>
+  </div>
+
+  <div class="content-section dashboard">
+    <h2>Daily Record ({{ records_pagination.total }})</h2>
+    <div class="flex-container">
+      <a type="button" class="btn btn-outline-info" href="{{ url_for('records.add') }}">Add</a>
+      <a type="button" class="btn btn-outline-info" href="{{ url_for('main.download') }}">Download</a>
+      <a type="button" class="btn btn-outline-info" href="{{ url_for('records.graph') }}">See Graph</a>
+    </div>
+    <div class="flex-container">
+      <table>
+        <tr>
+          <th>DATE</th>
+          <th>WAKE-UP</th>
+          <th>TO-BED</th>
+        </tr>
+      {% for record in records_pagination.items %}
+        <tr>
+          <td><a class="action" href="{{ url_for('records.update', sleep_id=record.id) }}">[{{ record.up | simplify(to_time=False) }}]</a></td>
+          <td><a class="text">{{ record.up | simplify(to_time=True) }}</a></td>
+          <td><a class="text">{{ record.to_bed | simplify(to_time=True) }}</a></td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <br>
+    {% for page_num in records_pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if records_pagination.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('main.dashboard', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.dashboard', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="content-section dashboard">
+    <h2>On Average</h2>
+    <div class="flex-container">
+      <table>
+        <tr>
+          <th>SLEEP</th>
+          <th>WAKE-UP</th>
+          <th>TO-BED</th>
+        </tr>
+        <tr>
+          <td><a class="text">{{ dashboard.avg_sleep }}</a></td>
+          <td><a class="text">{{ dashboard.avg_up }}</a></td>
+          <td><a class="text">{{ dashboard.avg_bed }}</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{% endblock %}
