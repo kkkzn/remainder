@@ -57,8 +57,9 @@ def dashboard():
         dashboard['avg_sleep'] = '{0[0]} hrs {0[1]} mins'.format(hour_min(int(avg_sleep)))
 
         # Remaining Time part
+        timezone = current_user.timezone
         up_today_dt = daily_records[0].up
-        bed_time, remaining = estimate_remaining_of_today(avg_sleep, up_today_dt)
+        bed_time, remaining = estimate_remaining_of_today(avg_sleep, up_today_dt, timezone)
         dashboard['bed_time'] = str(bed_time)[5:-3]
         dashboard['remaining'] = '{0[0]} hrs {0[1]} mins'.format(hour_min(remaining))
 
@@ -67,7 +68,7 @@ def dashboard():
             dashboard['remaining'] = '[Record for Today must be added]'
 
         # Pie-chart for Remaining Time
-        plot_url = encode_pie_chart(config_pie(remaining, up_today_dt))
+        plot_url = encode_pie_chart(config_pie(remaining, up_today_dt, timezone))
 
         pie_html_string = Markup(
             f'<img src="data:image/png;base64,{plot_url}" width: 360px; height: 288px>'

@@ -1,6 +1,6 @@
 import base64
 import datetime
-import time
+import pytz
 from decimal import Decimal, ROUND_HALF_UP
 import io
 
@@ -54,7 +54,7 @@ def avg_delta(deltas: list):
     return str(avg_td)
 
 
-def estimate_remaining_of_today(sleep_sec: float, up_time: datetime):
+def estimate_remaining_of_today(sleep_sec: float, up_time: datetime, tz: str):
     # calculate the average time of being awake
     being_awake = str(86400.0 - sleep_sec)
     # round-up
@@ -66,12 +66,13 @@ def estimate_remaining_of_today(sleep_sec: float, up_time: datetime):
     bed_time = datetime.datetime.fromtimestamp(float(bed_time_unix))
 
     # [remainder of the day] = [estimated bed_time] - [current time]
-    remaining_sec = bed_time_unix - int(time.time())
+    current_time = int(datetime.datetime.now(pytz.timezone(tz)).timestamp())
+    remaining_sec = bed_time_unix - current_time
 
     return bed_time, remaining_sec
 
 
-def config_pie(remaining_sec: int, up_time: datetime):
+def config_pie(remaining_sec: int, up_time: datetime, tz):
     # default config: draw an empty pie chart
     config = {
         'data': [0, 0, 100],
@@ -84,8 +85,9 @@ def config_pie(remaining_sec: int, up_time: datetime):
         config['title'] = '[Record for Today must be added]'
 
     else:
+        now = int(datetime.datetime.now(pytz.timezone(tz)).timestamp())
         remain = int(remaining_sec)
-        spent = int(time.time() - up_time.timestamp())
+        spent = now - up_time.timestamp()
         wake_up_time = str(up_time)[11:-3]
         date = str(up_time.date())
 

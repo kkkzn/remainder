@@ -1,5 +1,7 @@
+import pytz
+
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from remainder.models import User
@@ -10,6 +12,8 @@ class RegistrationForm(FlaskForm):
                            validators=[Length(min=2, max=20), DataRequired()])
     email = StringField('Email',
                         validators=[Email(), DataRequired()])
+    timezone = SelectField('Time Zone', validators=[DataRequired()],
+                           choices=pytz.common_timezones)
     password = PasswordField('Password',
                              validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
@@ -40,6 +44,8 @@ class UpdateAccountForm(FlaskForm):
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
+    timezone = SelectField('Timezone (Region/City)', validators=[DataRequired()],
+                           choices=pytz.common_timezones)
     submit = SubmitField('Update')
 
     def validate_username(self, username):
