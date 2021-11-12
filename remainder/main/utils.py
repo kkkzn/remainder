@@ -66,13 +66,15 @@ def estimate_remaining_of_today(sleep_sec: float, up_time: datetime, tz: str):
     bed_time = datetime.datetime.fromtimestamp(float(bed_time_unix))
 
     # [remainder of the day] = [estimated bed_time] - [current time]
-    current_time = int(datetime.datetime.now(pytz.timezone(tz)).timestamp())
-    remaining_sec = bed_time_unix - current_time
+    # To support different timezones, current time and bed time are made timezone aware
+    current_time_aware = datetime.datetime.now(pytz.timezone(tz))
+    bed_time_aware = pytz.timezone(tz).localize(bed_time)
+    remaining_sec = (bed_time_aware - current_time_aware).total_seconds()
 
-    return bed_time, remaining_sec
+    return bed_time, int(remaining_sec)
 
 
-def config_pie(remaining_sec: int, up_time: datetime, tz):
+def config_pie(remaining_sec: int, up_time: datetime, tz: str):
     # default config: draw an empty pie chart
     config = {
         'data': [0, 0, 100],
@@ -85,9 +87,10 @@ def config_pie(remaining_sec: int, up_time: datetime, tz):
         config['title'] = '[Record for Today must be added]'
 
     else:
-        now = int(datetime.datetime.now(pytz.timezone(tz)).timestamp())
-        remain = int(remaining_sec)
-        spent = now - up_time.timestamp()
+        current_time_aware = datetime.datetime.now(pytz.timezone(tz))
+        up_time_aware = pytz.timezone(tz).localize(up_time)
+        remain = remaining_sec
+        spent = int((current_time_aware - up_time_aware).total_seconds())
         wake_up_time = str(up_time)[11:-3]
         date = str(up_time.date())
 
