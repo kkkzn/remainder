@@ -26,7 +26,7 @@ If this was you, you can set a new password here:\n{url_for('users.reset_token',
 If you don't want to change your password or didn't request this, just ignore and delete this message.\n
 To keep your account secure, please don't forward this email to anyone.\n
 Cheers,\n
-Remainder Admin""",
+Remainder Admin\nREMAINDER\nhttps://remainder-app.herokuapp.com/""",
         'fromAddress': os.environ.get('EMAIL_REMAINDER'),
         'toAddress': user.email
     }

@@ -111,7 +111,7 @@ def contact():
             'subject': f"We've got your message!",
             'bodyText': f"""Dear {form.firstname.data},\n\n
 Thank you for contacting us! We've received your message and will get back to you within 48 hours.\n
-Cheers,\nRemainder Admin""",
+Cheers,\nRemainder Admin\nREMAINDER\nhttps://remainder-app.herokuapp.com/""",
             'fromAddress': admin_email,
             'toAddress': form.email.data
         }
