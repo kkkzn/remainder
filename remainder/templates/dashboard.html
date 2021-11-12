@@ -28,9 +28,9 @@
         </tr>
       {% for record in records_pagination.items %}
         <tr>
-          <td><a class="action" href="{{ url_for('records.update', sleep_id=record.id) }}">[{{ record.up | simplify(to_time=False) }}]</a></td>
-          <td><a class="text">{{ record.up | simplify(to_time=True) }}</a></td>
-          <td><a class="text">{{ record.to_bed | simplify(to_time=True) }}</a></td>
+          <td><a class="action" href="{{ url_for('records.update', sleep_id=record.id) }}">[{{ record.up | simplify(to='date') }}]</a></td>
+          <td><a class="text">{{ record.up | simplify(to='time') }}</a></td>
+          <td><a class="text">{{ record.to_bed | simplify(to='time') }}</a></td>
         </tr>
       {% endfor %}
       </table>

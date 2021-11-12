@@ -14,9 +14,12 @@ import seaborn as sns
 mpl.use('Agg')
 
 
-def simplify(dt: datetime, to_time: bool = True) -> str:
-    simplified = str(dt)[10:-3]
-    if not to_time:
+def simplify(dt: datetime, to: str) -> str:
+    if to == 'time':
+        simplified = str(dt)[10:-3]
+    elif to == 'date':
+        simplified = datetime.datetime.strftime(dt, '%b-%d')
+    else:
         simplified = str(dt)[:10]
     return simplified
 
