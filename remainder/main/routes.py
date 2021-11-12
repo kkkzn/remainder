@@ -101,7 +101,7 @@ def contact():
 
         config_forward = {
             'subject': f'Message from User ({form.firstname.data})',
-            'bodyText': f"""{form.firstname.data} ({form.email.data}) wrote\n\nMessage:\n{form.message.data}""",
+            'bodyText': f"""{form.firstname.data} {form.lastname.data} ({form.email.data}) wrote\n\nMessage:\n{form.message.data}""",
             'fromAddress': admin_email,
             'toAddress': admin_email
         }
