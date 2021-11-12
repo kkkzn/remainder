@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    timezone = db.Column(db.String, nullable=False)
+    timezone = db.Column(db.String)
     records = db.relationship('Sleep', backref='user', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
@@ -44,3 +44,9 @@ class Sleep(db.Model):
 
     def __repr__(self):
         return f'Sleep Record (up at {self.up}, to_bed at {self.to_bed})'
+
+
+class Timezone(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    region = db.Column(db.String)
+    city = db.Column(db.String)
