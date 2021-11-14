@@ -101,8 +101,8 @@ def config_pie(remaining_sec: int, up_time: datetime, tz: str):
 
         config['labels'] = [
             'Woke up\n  at {}'.format(wake_up_time),
-            'Remaining\n{0[0]}hr {0[1]}mins'.format(hour_min(remain)),
-            'Spent\n{0[0]}hr {0[1]}mins'.format(hour_min(spent))
+            'Remaining\n{0[0]}h {0[1]}m'.format(hour_min(remain)),
+            'Spent\n{0[0]}h {0[1]}m'.format(hour_min(spent))
         ]
 
         config['title'] = date

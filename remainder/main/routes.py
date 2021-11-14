@@ -54,17 +54,17 @@ def dashboard():
 
         dashboard['avg_up'] = avg_up[7:12]
         dashboard['avg_bed'] = avg_bed[7:12]
-        dashboard['avg_sleep'] = '{0[0]} hrs {0[1]} mins'.format(hour_min(int(avg_sleep)))
+        dashboard['avg_sleep'] = '{0[0]} h {0[1]} m'.format(hour_min(int(avg_sleep)))
 
         # Remaining Time part
         timezone = current_user.timezone
         up_today_dt = daily_records[0].up
         bed_time, remaining = estimate_remaining_of_today(avg_sleep, up_today_dt, timezone)
         dashboard['bed_time'] = str(bed_time)[5:-3]
-        dashboard['remaining'] = '{0[0]} hrs {0[1]} mins'.format(hour_min(remaining))
+        dashboard['remaining'] = '{0[0]} h {0[1]} m'.format(hour_min(remaining))
 
         if remaining < 0:
-            flash("Need a new records to refresh Remaining Time!", 'alert')
+            flash("Need a new record to refresh Remaining Time!", 'alert')
             dashboard['remaining'] = '[Record for Today must be added]'
 
         # Pie-chart for Remaining Time
