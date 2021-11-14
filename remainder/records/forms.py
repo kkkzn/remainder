@@ -19,7 +19,7 @@ class SleepRecordForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     csv = FileField('CSV', validators=[FileRequired(), FileAllowed(['csv'])])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Upload')
 
     """
     Validation to make sure that csv has the valid format.

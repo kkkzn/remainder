@@ -54,14 +54,14 @@ def dashboard():
 
         dashboard['avg_up'] = avg_up[7:12]
         dashboard['avg_bed'] = avg_bed[7:12]
-        dashboard['avg_sleep'] = '{0[0]} h {0[1]} m'.format(hour_min(int(avg_sleep)))
+        dashboard['avg_sleep'] = '{0[0]}h {0[1]}m'.format(hour_min(int(avg_sleep)))
 
         # Remaining Time part
         timezone = current_user.timezone
         up_today_dt = daily_records[0].up
         bed_time, remaining = estimate_remaining_of_today(avg_sleep, up_today_dt, timezone)
         dashboard['bed_time'] = str(bed_time)[5:-3]
-        dashboard['remaining'] = '{0[0]} h {0[1]} m'.format(hour_min(remaining))
+        dashboard['remaining'] = '{0[0]}h {0[1]}m'.format(hour_min(remaining))
 
         if remaining < 0:
             flash("Need a new record to refresh Remaining Time!", 'alert')
@@ -84,7 +84,13 @@ def dashboard():
 @login_required
 def download():
     daily_records = list(Sleep.query.filter_by(user=current_user).order_by(Sleep.up.desc()))
+    if len(daily_records) == 0:
+        flash('No records to download.', 'info')
+        return redirect(url_for('main.dashboard'))
     csv = sql_query_to_csv(daily_records, columns_to_exclude=['user_id', 'id', '_sa_instance_state', 'created_at'])
+    # Remove unnecessary ',' at the EOL
+    csv = csv.replace(',\n', '\n')
+
     date = datetime.date.today().strftime('%Y%m%d')
     return Response(
         csv,

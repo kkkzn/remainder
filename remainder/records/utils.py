@@ -11,7 +11,7 @@ def try_parse(dt_like_str):
     try:
         dt = parse(dt_like_str)
         return dt
-    except ValueError:
+    except TypeError:
         return None
 
 

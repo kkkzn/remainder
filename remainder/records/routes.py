@@ -82,7 +82,7 @@ def upload():
             datum = cleaned.iloc[i, :].to_dict()
             data_to_add.append(datum)
 
-        records_to_add = [Sleep(up=d['up'], to_bed=d['to_bed'], user=current_user) for d in data_to_add]
+        records_to_add = [Sleep(up=d[' up'], to_bed=d['to_bed'], user=current_user) for d in data_to_add]
 
         # import data into database
         db.session().add_all(records_to_add)
