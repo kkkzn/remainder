@@ -46,4 +46,4 @@ REMAINDER is a time recording web application with functionality such as:
   
 ## Contact:
   - kkkzn - email - kznrod@gmail.com 
-  - Project link: 
+  - Project link: https://github.com/kkkzn/remainder
