@@ -82,7 +82,7 @@ def upload():
             datum = cleaned.iloc[i, :].to_dict()
             data_to_add.append(datum)
 
-        records_to_add = [Sleep(up=d[' up'], to_bed=d['to_bed'], user=current_user) for d in data_to_add]
+        records_to_add = [Sleep(up=d['up'], to_bed=d['to_bed'], user=current_user) for d in data_to_add]
 
         # import data into database
         db.session().add_all(records_to_add)
@@ -101,7 +101,7 @@ def upload():
 @login_required
 def graph():
     daily_records = list(Sleep.query.filter_by(user=current_user).
-        order_by(Sleep.up.desc()).limit(14))
+                         order_by(Sleep.up.desc()).limit(14))
 
     base_dts, up_deltas, bed_deltas, sleep_sec = get_scalers(daily_records)
 
@@ -120,4 +120,4 @@ def graph():
         )
 
     return render_template('/records/graph.html', title='Graph',
-                            graph_html_string=graph_html_string)
+                           graph_html_string=graph_html_string)

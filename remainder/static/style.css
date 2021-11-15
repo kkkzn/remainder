@@ -46,6 +46,11 @@ div.side_by_side > div.form-group {
     margin-right: 1rem;
 }
 
+div.form-group.hint {
+
+}
+
+
 .content-section {
   background: #ffffff;
   padding: 10px 30px;

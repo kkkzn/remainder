@@ -88,8 +88,8 @@ def download():
         flash('No records to download.', 'info')
         return redirect(url_for('main.dashboard'))
     csv = sql_query_to_csv(daily_records, columns_to_exclude=['user_id', 'id', '_sa_instance_state', 'created_at'])
-    # Remove unnecessary ',' at the EOL
-    csv = csv.replace(',\n', '\n')
+    csv = csv.replace(',\n', '\n')  # Remove unnecessary ',' at the EOL
+    csv = csv.replace(' up', 'up')  # Remove unnecessary whitespace before 'up'
 
     date = datetime.date.today().strftime('%Y%m%d')
     return Response(

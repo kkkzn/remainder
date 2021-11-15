@@ -1,7 +1,7 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from remainder import db, bcrypt
-from remainder.models import User
+from remainder.models import User, Timezone
 from remainder.users.forms import (RegistrationForm, LoginForm, RequestResetForm,
                                    ResetPasswordForm, UpdateAccountForm)
 from remainder.users.utils import config_reset_email, send_email
@@ -15,15 +15,30 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.dashboard'))
     form = RegistrationForm()
+    form.timezone_city.choices = [(tz.id, tz.city) for tz in Timezone.query.filter_by(region='Africa').all()]
     if form.validate_on_submit():
+        city = Timezone.query.filter_by(id=form.timezone_city.data)
+        region = form.timezone_region.data
+        timezone = f'{region}/{city}'
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data,
-                    timezone=form.timezone.data, password=hashed_password)
+                    timezone=timezone, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('users/register.html', title='Register', form=form)
+
+
+@users_bp.route("/timezone/<region>")
+def timezone(region):
+    timezones = Timezone.query.filter_by(region=region).all()
+    tz_list = []
+    for tz in timezones:
+        tzObj = {'id': tz.id, 'city': tz.city}
+        tz_list.append(tzObj)
+
+    return jsonify({'timezones': tz_list})
 
 
 @users_bp.route('/', methods=['GET', 'POST'])

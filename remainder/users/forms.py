@@ -12,8 +12,15 @@ class RegistrationForm(FlaskForm):
                            validators=[Length(min=2, max=20), DataRequired()])
     email = StringField('Email',
                         validators=[Email(), DataRequired()])
-    timezone = SelectField('Timezone (Region/City)', validators=[DataRequired()],
-                           choices=pytz.common_timezones)
+    timezone_region = SelectField('Timezone(Region)', validators=[DataRequired()],
+                                  choices=[
+                                  'Africa', 'America', 'America/Argentina',
+                                  'America/Indiana', 'America/Kentucky', 'America/North_Dakota',
+                                  'Antarctica', 'Arctic', 'Asia', 'Atlantic', 'Australia',
+                                  'Canada', 'Europe', 'Indian', 'Pacific','US'
+                                  ])
+    timezone_city = SelectField('Timezone(City)', validators=[DataRequired()],
+                                choices=[])
     password = PasswordField('Password',
                              validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',

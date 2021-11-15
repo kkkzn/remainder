@@ -34,18 +34,33 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.timezone.label(class="form-control-label") }}
-                    {% if form.timezone.errors %}
-                        {{ form.timezone(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.timezone.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.timezone(class="form-control form-control-lg") }}
-                    {% endif %}
+                <div class="side_by_side">
+                    <div class="form-group ">
+                        {{ form.timezone_region.label(class="form-control-label") }}
+                        {% if form.timezone_region.errors %}
+                            {{ form.timezone_region(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.timezone_region.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.timezone_region(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.timezone_city.label(class="form-control-label") }}
+                        {% if form.timezone_city.errors %}
+                            {{ form.timezone_city(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.timezone_city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.timezone_city(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="form-group">
                     {{ form.password.label(class="form-control-label") }}
@@ -84,4 +99,27 @@
             Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
         </small>
     </div>
+
+<script>
+    let timezone_region_select = document.getElementById("timezone_region");
+    let timezone_city_select = document.getElementById("timezone_city");
+
+    timezone_region_select.onchange = function()  {
+        region = timezone_region_select.value;
+
+        fetch('/timezone/' + region).then(function(response) {
+            response.json().then(function(data) {
+                let optionHTML = '';
+
+                for (let tz of data.timezones) {
+                    optionHTML += '<option value="' + tz.id + '">' + tz.city + '</option>';
+                }
+
+                timezone_city_select.innerHTML = optionHTML;
+
+            })
+
+    });
+    }
+</script>
 {% endblock %}
