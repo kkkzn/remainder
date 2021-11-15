@@ -19,7 +19,7 @@ def add():
         sleep_record = Sleep(up=form.up.data, to_bed=form.to_bed.data, user=current_user)
         db.session.add(sleep_record)
         db.session.commit()
-        flash('A new records has been created!', 'success')
+        flash('A new record has been created!', 'success')
         return redirect(url_for('main.dashboard'))
     return render_template('records/add.html', form=form,
                            title='Add', legend='New Record')
