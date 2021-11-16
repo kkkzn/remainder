@@ -27,19 +27,20 @@ REMAINDER is a time recording web application with functionality such as:
   The next request will wake it up, but users will notice a delay while the app is started.
     
 ## Built with: 
-  FLASK
-  Bootstrap
-  JQuery
-  Heroku
+  FLASK   
+  Bootstrap  
+  JQuery  
+  Heroku  
 
 ## Usage:
   Visit: https://remainder-app.herokuapp.com/ , create an account with your email, then start adding records.
 
 ## Design choices:
-  - Ranges of sleep-habit bar charts are arbitrarily fixed:  
+  - Ranges of sleep-habit bar charts are arbitrarily set:  
     - 4 hours to 10 hours for sleep hour
     - 5 am to 11 am for wake-up time
-    - 9 pm to 3 am for bed time  I hope this design prompts users to adjust their sleep-habit not to go beyond these ranges.
+    - 9 pm to 3 am for bed time  
+  I hope this design prompts users to adjust their sleep-habit not to go beyond these ranges.
   
   - The options of Timezone field on Account page are too broad. I tried my best to separate the field into Region and City and make them dynamic in the same way as the field on Registration page does: selecting Region narrows down the list of City options, but couldn't make it. I'm hoping that users don't relocate across timezones so often.
   
