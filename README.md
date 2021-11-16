@@ -36,7 +36,7 @@ REMAINDER is a time recording web application with functionality such as:
   Visit: https://remainder-app.herokuapp.com/ , create an account with your email, then start adding records.
 
 ## Design choices:
-  - Ranges of sleep-habit bar charts are arbitrarily set. I hope this design prompts users to adjust their sleep-habit not to go beyond these ranges:
+  - Ranges of sleep-habit bar charts are arbitrarily set. I hope this design prompts users to manage their sleep-habit not to go beyond these ranges:
     - 4 hours to 10 hours for sleep hour
     - 5 am to 11 am for wake-up time
     - 9 pm to 3 am for bed time  
