@@ -1,9 +1,9 @@
 # REMAINDER
 REMAINDER is a time recording web application with functionality such as:
 
-- record keeping for wake-up time and bedtime
+- record-keeping for wake-up time and bedtime
 - visualization of the remaining time of the day
-- visualization of your wake-up time, bedtime, and sleep hours over a period of time (max: 14 days)
+- visualization of your wake-up time, bedtime, and sleep hours over some time (max: 14 days)
 
 ## Video Demo:  <URL HERE>
 
@@ -18,13 +18,13 @@ REMAINDER is a time recording web application with functionality such as:
   - App supports common timezones.
   - App visualizes the remainder of the day as a pie chart.
   - App visualizes your sleep habit (wake-up, bed, sleep hours) in bar charts.
-  - User can download your wake-up time and bedtime in a csv file.
-  - User can upload sleep data (wake-up time and bedtime) through csv file.
-  - User can retrieve password through Forgot Password? link. (A secure password reset token will be sent to user's email.)
+  - User can download your wake-up time and bedtime in a CSV file.
+  - User can upload sleep data (wake-up time and bedtime) through a CSV file.
+  - User can retrieve the password through Forgot Password? link. (A secure password reset token will be sent to the user's email.)
   
 ## Note:  
-  REMAINDER is currently hosted by heroku with "free" plan, so will idle (sleep) after a period of inactivity.  
-  The next request will wake it up, but users will notice a delay while the app is started.
+  REMAINDER is currently hosted by Heroku with a "free" plan, so it will idle (sleep) after a period of inactivity.  
+  The following request will wake it up, but users will notice a delay while the app is started.
     
 ## Built with: 
   FLASK   
@@ -33,15 +33,15 @@ REMAINDER is a time recording web application with functionality such as:
   Heroku  
 
 ## Usage:
-  Visit: https://remainder-app.herokuapp.com/ , create an account with your email, then start adding records.
+  Visit: https://remainder-app.herokuapp.com/, create an account with your email, then start adding records.
 
 ## Design choices:
-  - Ranges of sleep-habit bar charts are arbitrarily set. I hope this design prompts users to manage their sleep-habit not to go beyond these ranges:
+  - Ranges of sleep-habit bar charts are arbitrarily set. I hope this design prompts users to manage their sleep habit not to go beyond these ranges:
     - 4 hours to 10 hours for sleep hour
     - 5 am to 11 am for wake-up time
     - 9 pm to 3 am for bedtime  
   
-  - The options of Timezone field on Account page are too broad. I tried my best to separate the field into Region and City and make them dynamic in the same way as the field on Registration page does: selecting Region narrows down the list of City options, but couldn't make it. I'm hoping that users don't relocate across timezones so often.
+  - The options of the Timezone field on the Account page are too broad. I tried my best to separate the field into Region and City and make them dynamic in the same way as the field on the Registration page does: selecting Region narrows down the list of City options, but I couldn't make it. I'm hoping that users don't relocate across timezones so often.
   
 ## Contact:
   - kkkzn - email - kznrod@gmail.com 
