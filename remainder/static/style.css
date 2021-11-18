@@ -103,16 +103,12 @@ th, td {
 
 @media screen and (max-width: 1050px) {
     img {
-        width: 70%;
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 680px) {
     table {
-        width: 100%;
-    }
-
-    img {
         width: 100%;
     }
 

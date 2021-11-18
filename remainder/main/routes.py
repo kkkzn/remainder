@@ -60,7 +60,7 @@ def dashboard():
         timezone = current_user.timezone
         up_today_dt = daily_records[0].up
         bed_time, remaining = estimate_remaining_of_today(avg_sleep, up_today_dt, timezone)
-        dashboard['bed_time'] = str(bed_time)[5:-3]
+        dashboard['bed_time'] = str(bed_time)[-8:-3]
         dashboard['remaining'] = '{0[0]}h {0[1]}m'.format(hour_min(remaining))
 
         if remaining < 0:
