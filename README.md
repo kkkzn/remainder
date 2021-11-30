@@ -5,7 +5,7 @@ REMAINDER is a time recording web application with functionality such as:
 - visualization of the remaining time of the day
 - visualization of your wake-up time, bedtime, and sleep hours over some time (max: 14 days)
 
-## Video Demo:  <URL HERE>
+## Video Demo: https://youtu.be/mI3zStI0QWI
 
 ## Description: 
   REMAINDER estimates the remaining time of the day from your wake-up time and average hours of sleep with the following logic:
