@@ -17,9 +17,9 @@ def register():
     form = RegistrationForm()
     form.timezone_city.choices = [(tz.id, tz.city) for tz in Timezone.query.all()]
     if form.validate_on_submit():
-        city = Timezone.query.filter_by(id=form.timezone_city.data)
+        tz = Timezone.query.filter_by(id=form.timezone_city.data).first()
         region = form.timezone_region.data
-        timezone = f'{region}/{city}'
+        timezone = f'{region}/{tz.city}'
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data,
                     timezone=timezone, password=hashed_password)
