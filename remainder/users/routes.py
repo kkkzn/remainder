@@ -15,7 +15,7 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.dashboard'))
     form = RegistrationForm()
-    form.timezone_city.choices = [(tz.id, tz.city) for tz in Timezone.query.filter_by(region='Africa').all()]
+    form.timezone_city.choices = [(tz.id, tz.city) for tz in Timezone.query.all()]
     if form.validate_on_submit():
         city = Timezone.query.filter_by(id=form.timezone_city.data)
         region = form.timezone_region.data

@@ -104,7 +104,7 @@
     let timezone_region_select = document.getElementById("timezone_region");
     let timezone_city_select = document.getElementById("timezone_city");
 
-    timezone_region_select.onchange = function()  {
+    timezone_region_select.onchange = function() {
         region = timezone_region_select.value;
 
         fetch('/timezone/' + region).then(function(response) {
